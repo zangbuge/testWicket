@@ -1,26 +1,46 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>test</groupId>
-  <artifactId>helloWicket</artifactId>
-  <packaging>war</packaging>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>helloWicket Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-        <dependency>
-    <groupId>org.apache.wicket</groupId>
-    <artifactId>wicket-core</artifactId>
-    <version>8.0.0-M8</version>
-</dependency>
-  </dependencies>
-  <build>
-    <finalName>helloWicket</finalName>
-  </build>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>test</groupId>
+	<artifactId>helloWicket</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>helloWicket Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-core</artifactId>
+			<version>8.0.0-M8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-extensions -->
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-extensions</artifactId>
+			<version>8.0.0-M8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-auth-roles -->
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-auth-roles</artifactId>
+			<version>8.0.0-M8</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.wicket/wicket-spring -->
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-spring</artifactId>
+			<version>8.0.0-M8</version>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<finalName>helloWicket</finalName>
+	</build>
 </project>

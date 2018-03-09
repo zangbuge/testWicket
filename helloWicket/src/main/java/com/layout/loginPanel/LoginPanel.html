@@ -7,13 +7,14 @@
 <body>
 	<wicket:panel>
     <div style="margin: auto; width: 40%;">
-       <form  id="loginForm" method="get">
+       <form wicket:id="loginForm" enctype="multipart/form-data" >
          <fieldset id="login" class="center">
             <legend >Login</legend>
-            <span >Username: </span><input type="text" id="username"/><br/>
-            <span >Password: </span><input type="password" id="password" />
+            <span >Username: </span><input wicket:id="Username" type="text" /><br/>
+            <span >Password: </span><input wicket:id="Password" type="password" />
+            <input wicket:id="fileUpload" type="file"/>
             <p>
-               <input type="submit" name="login" value="login"/>
+               <input type="submit" value="login"/>
             </p>
          </fieldset>
       </form>
