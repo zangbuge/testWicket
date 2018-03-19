@@ -2,6 +2,8 @@ package com.layout.loginPanel;
 
 import java.io.File;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
@@ -9,6 +11,8 @@ import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.protocol.http.servlet.ServletWebRequest;
+import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.util.lang.Bytes;
 
 
@@ -19,6 +23,9 @@ public class LoginPanel extends Panel {
 	private static final long serialVersionUID = 5902817109284565968L;
 	public LoginPanel(String id) {
 		super(id);
+		//获取session
+		HttpSession session = ((ServletWebRequest)RequestCycle.get().getRequest()).getContainerRequest().getSession();
+                
 		
 		final TextField<String> username = new TextField<String>("Username",new Model<String>("请输入用户名"));
 		final PasswordTextField password = new PasswordTextField("Password", new Model<String>("请输入密码"));
