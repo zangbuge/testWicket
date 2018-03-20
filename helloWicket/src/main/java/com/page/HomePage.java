@@ -5,6 +5,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Fragment;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.layout.simpleLoginPage.SimpleLoginPage;
 import com.login.Login;
@@ -23,10 +24,16 @@ public class HomePage extends WebPage {
 
 	public HomePage() {
 		
-		
-		// 改变标签的值
+		// 绑定页面的 wicket:id="label" 标签
 		label1 = new Label("label", "label values11111");
 		label2 = new Label("label", "label values22222");
+		
+		
+		// 修改标签属性
+		label2.add(new AttributeModifier("style", "color:red;font-weight:bold"));
+		
+		
+		// 改变标签的值
 		add(label1);
 		add(new Link<Void>("reload"){
 			private static final long serialVersionUID = -546827954856297675L;
@@ -42,17 +49,17 @@ public class HomePage extends WebPage {
 		});
 		
 		
-		// 修改标签属性未测试通过
-		
 		//标记片段,定义了一个片段在一个页面,我们使用它作为内容区域:
 		//使wicket:id="fragmentId"的内容替换掉 id = "contentArea"的内容
 		Fragment fragment = new  Fragment ("contentArea", "fragmentId", this);
 		add(fragment);
 		
+		
 		//给html中的标签添加内容
-		add(new Label("helloMessage", "Hello WicketWorld!"));
+		add(new Label("helloMessage", "Hello WicketWorld! from java"));
 
-		//添加一个链接
+		
+		//添加一个链接,跳转到另一个页面
 		add(new Link<Void>("login"){// "login" 对应html标签的id
 			private static final long serialVersionUID = -546827954856297675L;
 
@@ -61,13 +68,21 @@ public class HomePage extends WebPage {
 				//他版本setResponsePage需要在页面输入一个页面实例,而不是类:
 				/*AnotherPage anotherPage = new AnotherPage();
 		        setResponsePage(anotherPage);*/
-
+				
+				// 页面之间传递参数
+				PageParameters pageParameters = new PageParameters();
+				//add a couple of parameters
+				pageParameters.add("name", "John");
+				pageParameters.add("age", 28);
+				//retrieve the value of 'age' parameter
+				pageParameters.get("age");
 				//跳向的页面
-				setResponsePage(Login.class);
+				setResponsePage(Login.class,pageParameters);
 			}
 
 		});
 
+		
 		//跳向布局面板
 		add(new Link<Void>("panelID"){// "login" 对应html标签的id
 			private static final long serialVersionUID = -54682795485659767L;

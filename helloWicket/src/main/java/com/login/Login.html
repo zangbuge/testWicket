@@ -5,6 +5,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>hello wellcome</div>
+	<div>hello wellcome 登录成功了!</div>
+	<!-- 以下的标记链接文件,不用在java文件中写, 直接使用 -->
+	<div id="bd">
+		<wicket:link>
+			<a href="../page/HomePage.html">go to HomePage</a>
+			<br />
+		</wicket:link>
+	</div>
+	<a wicket:id="externalSite">Search me on 百度外部链接</a>
 </body>
 </html>
