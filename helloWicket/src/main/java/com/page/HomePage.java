@@ -1,14 +1,23 @@
 package com.page;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Fragment;
+import org.apache.wicket.markup.repeater.RepeatingView;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.layout.simpleLoginPage.SimpleLoginPage;
 import com.login.Login;
+import com.vo.User;
 
 /**该类为html页面的数据javabean,类名必须和该数据挂载的html名称一致
  * @author: Administrator
@@ -99,9 +108,51 @@ public class HomePage extends WebPage {
 			}
 
 		});
+		
+		
+		//使用model设置标签数据
+		User user = new User();
+		user.setName("张三");
+		Model<String> model = new Model<String>(user.getName());
+		//静态实现
+		label1 = new Label("testModelId", model);
+		
+		//动态实现
+		PropertyModel<Object> propertyModel = new PropertyModel<Object>(user, "name");
+		label1 = new Label("testModelId", propertyModel);
+		// 挂载上标签数据
+		add(label1);
+		
+		
+		
+		// li标签的使用
+		RepeatingView listItems = new RepeatingView("listItems");
+		listItems.add(new Label(listItems.newChildId(), "li标签的用法"));
+		listItems.add(new Label(listItems.newChildId(), "green"));
+		listItems.add(new Label(listItems.newChildId(), "blue"));
+		listItems.add(new Label(listItems.newChildId(), "red"));
+		add(listItems);
+		
+		// 使用Listview 组件,显示一个给定的对象列表
+		List<User> users = new ArrayList<User>();
+		User user1 = new User();
+		user1.setName("鱼人");
+		user1.setAge(12);
+		users.add(user1);
+		User user2 = new User();
+		user2.setName("李四");
+		users.add(user2);
+		ListView<User> listView = new ListView<User>("users",users) {
+			private static final long serialVersionUID = 1L;
 
+			@Override
+			protected void populateItem(ListItem<User> item) {
+				// name 为user中定义的属性
+				item.add(new Label("userName", new PropertyModel<Object>(item.getModel(), "name")));
+			}
+		};
+		
+		add(listView);
+		
 	}
-	
-	
-
 }

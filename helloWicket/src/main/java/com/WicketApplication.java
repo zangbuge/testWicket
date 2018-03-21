@@ -1,9 +1,11 @@
 package com;
 
 import org.apache.wicket.ISessionListener;
+import org.apache.wicket.core.request.mapper.CryptoMapper;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
+import com.login.Login;
 import com.page.HomePage;
 
 /**该累为项目初始化配置
@@ -12,11 +14,11 @@ import com.page.HomePage;
  */
 public class WicketApplication extends WebApplication {
 	
+	
 	/** 配置项目默认页
 	 */
 	@Override
 	public Class<? extends WebPage> getHomePage(){
-
 		return HomePage.class;
 	}
 	
@@ -32,7 +34,22 @@ public class WicketApplication extends WebApplication {
 		ISessionListener myListener = null;
 		getSessionListeners().add(myListener);
 		
+		//加密uri
+		setRootRequestMapper(new CryptoMapper(getRootRequestMapper(), this));
 		
+		//挂载一个页面,生成该页面的uri,uri中可以使用${foo}
+		/**
+		 *  PageParameters pageParameters = new PageParameters();
+			pageParameters.add("foo", "foo_value");
+
+			setResponsePage(MountedPageWithPlaceholder.class, pageParameters)
+		 */
+		mountPage("/toLogin", Login.class);
 		
 	}
+	
+	
+	
+	
+	
 }
