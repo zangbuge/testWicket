@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
@@ -153,6 +156,45 @@ public class HomePage extends WebPage {
 		};
 		
 		add(listView);
+		
+		
+		// ajax 的使用
+		label1 = new Label("showValueID","显示ajax的信息");
+		// 自动生成标记id,必须
+		label1.setOutputMarkupId(true);
+		add (label1);
+		AjaxLink<Void> ajaxLink = new AjaxLink<Void>("ajaxLink") {
+			private static final long serialVersionUID = 6003762593034849892L;
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				// TODO Auto-generated method stub
+				label1.setDefaultModel(new Model<String>("ajax返回的消息"));
+				// 设置响应对象
+				target.add(label1);
+				// 添加js脚本
+				target.appendJavaScript(";alert('Hello!!');");
+			}
+		};
+		add(ajaxLink);
+		
+		
+		// 添加一个模态弹窗
+		final ModalWindow modalWindow = new ModalWindow("modalWindow");
+        Label label = new Label(modalWindow.getContentId(), "I'm a modal window!");
+        modalWindow.setContent(label);
+        modalWindow.setTitle("Modal window");
+        add(modalWindow);
+        AjaxLink<Void> mw = new AjaxLink<Void>("openWindow") {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick(AjaxRequestTarget arg0) {
+				modalWindow.show(arg0);
+			}
+		};
+		add(mw);
+		
 		
 	}
 }
