@@ -60,7 +60,6 @@ public class HomePage extends WebPage {
 			
 		});
 		
-		
 		//标记片段,定义了一个片段在一个页面,我们使用它作为内容区域:
 		//使wicket:id="fragmentId"的内容替换掉 id = "contentArea"的内容
 		Fragment fragment = new  Fragment ("contentArea", "fragmentId", this);
@@ -69,7 +68,6 @@ public class HomePage extends WebPage {
 		
 		//给html中的标签添加内容
 		add(new Label("helloMessage", "Hello WicketWorld! from java"));
-
 		
 		//添加一个链接,跳转到另一个页面
 		add(new Link<Void>("login"){// "login" 对应html标签的id
