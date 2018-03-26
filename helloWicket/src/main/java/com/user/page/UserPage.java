@@ -2,7 +2,6 @@ package com.user.page;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
 
 public class UserPage extends WebPage{
@@ -16,12 +15,6 @@ public class UserPage extends WebPage{
 	private Component userList = null;
 
 	public UserPage(){
-		Label label = new Label("addUser","添加用户");
-		add(label);
-		label = new Label("updateUser","更新用户");
-		add(label);
-		label = new Label("deleteUser","删除用户");
-		add(label);
 
 		// 添加   添加用户页面的
 		add(addUser = new AddUserPanel("active"));
@@ -40,10 +33,26 @@ public class UserPage extends WebPage{
 		};
 		//添加getuser事件
 		add(getUser);
+		
+		
+		// 添加用户事件
+		Link<Void> addUserPanel = new Link<Void>("addUser") {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				getPage().replace(new AddUserPanel("active"));
+			}
+		};
+		add(addUserPanel);
+		
+		
+		
 	}
 
 
-
+	/* setter getter 方法*/
 
 	public Component getUserList() {
 		return userList;

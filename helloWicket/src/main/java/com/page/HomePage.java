@@ -17,6 +17,7 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.layout.simpleLoginPage.SimpleLoginPage;
 import com.login.Login;
@@ -70,7 +71,7 @@ public class HomePage extends WebPage {
 		add(new Label("helloMessage", "Hello WicketWorld! from java"));
 		
 		//添加一个链接,跳转到另一个页面
-		add(new Link<Void>("login"){// "login" 对应html标签的id
+		add(new Link<String>("login"){// "login" 对应html标签的id
 			private static final long serialVersionUID = -546827954856297675L;
 
 			@Override
@@ -92,7 +93,6 @@ public class HomePage extends WebPage {
 
 		});
 
-		
 		//跳向布局面板
 		add(new Link<Void>("panelID"){// "login" 对应html标签的id
 			private static final long serialVersionUID = -54682795485659767L;
@@ -192,6 +192,7 @@ public class HomePage extends WebPage {
 			}
 		};
 		add(mw);
+		
 		
 		
 	}

@@ -1,6 +1,6 @@
 package com.user.page;
 
-import java.util.UUID;
+import java.io.Serializable;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -14,24 +14,24 @@ import org.slf4j.LoggerFactory;
 import com.user.pojo.User;
 import com.user.service.IUserService;
 
-public class AddUserPanel extends Panel{
+public class EditorUserPanel extends Panel{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2610154220466090205L;
-	private static final Logger logger = LoggerFactory.getLogger(AddUserPanel.class);
+	private static final long serialVersionUID = 1770040510175448466L;
+	private static final Logger logger = LoggerFactory.getLogger(EditorUserPanel.class);
 	
 	@SpringBean
 	private IUserService iUserService;
-
-	public AddUserPanel(String id) {
+	
+	public EditorUserPanel(String id,Model<Serializable> model) {
 		super(id);
 		// TODO Auto-generated constructor stub
-		User user = new User();
-		final TextField<String> name = new TextField<String>("name",new Model<String>("请输入用户名"));
-		final TextField<String> age = new TextField<String>("age", new Model<String>(""));
-		final TextField<String> photo = new TextField<String>("photo", new Model<String>(""));
+		final User user = (User)model.getObject();
+		final TextField<String> name = new TextField<String>("name",new Model<String>(user.getName()));
+		final TextField<Integer> age = new TextField<Integer>("age", new Model<Integer>(user.getAge()));
+		final TextField<String> photo = new TextField<String>("photo", new Model<String>(user.getPhoto()));
 		
 		Form<User> form = new Form<User>("form",new CompoundPropertyModel<User>(user)){
 			private static final long serialVersionUID = -1015640227541949220L;
@@ -43,13 +43,11 @@ public class AddUserPanel extends Panel{
 				String nm = name.getValue();
 				String a = age.getValue();
 				String p = photo.getValue();
-				User user = new User();
-				user.setId(UUID.randomUUID().toString());
 				user.setName(nm);
 				user.setAge(Integer.parseInt(a));
 				user.setPhoto(p);
-				iUserService.add(user);
-				logger.info("添加成功!");
+				iUserService.update(user);
+				logger.info("更新成功!");
 				getPage().replace(new UserListPanel("active"));
 			}
 			
@@ -60,7 +58,7 @@ public class AddUserPanel extends Panel{
 		form.add(photo);
 
 		add(form);
-
+		
 	}
 
 }
