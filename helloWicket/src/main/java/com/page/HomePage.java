@@ -17,10 +17,12 @@ import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.springframework.web.servlet.ModelAndView;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.layout.simpleLoginPage.SimpleLoginPage;
 import com.login.Login;
+import com.student.Student;
+import com.student.Service.IStudentservice;
 import com.vo.User;
 
 /**该类为html页面的数据javabean,类名必须和该数据挂载的html名称一致
@@ -35,6 +37,9 @@ public class HomePage extends WebPage {
 	
 	private Label label2;
 
+	@SpringBean
+	IStudentservice iStudentservice;
+	
 	public HomePage() {
 		
 		// 绑定页面的 wicket:id="label" 标签
@@ -193,6 +198,17 @@ public class HomePage extends WebPage {
 		};
 		add(mw);
 		
+		
+		// 测试postgres
+		add(new Link<Void>("testPostgres") {
+			private static final long serialVersionUID = 8197628091689786190L;
+
+			@Override
+			public void onClick() {
+				// TODO Auto-generated method stub
+				iStudentservice.add(new Student());
+			}
+		});
 		
 		
 	}

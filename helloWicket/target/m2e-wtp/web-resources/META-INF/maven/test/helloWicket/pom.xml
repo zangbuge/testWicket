@@ -15,12 +15,13 @@
 	</properties>
 
 	<dependencies>
+		<!-- junit测试包 -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
+			<version>4.8.1</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-core</artifactId>
@@ -244,6 +245,19 @@
 			<groupId>com.github.jsqlparser</groupId>
 			<artifactId>jsqlparser</artifactId>
 			<version>0.9.4</version>
+		</dependency>
+
+		<!-- 添加postgresql的驱动 -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.1</version>
+		</dependency>
+		<!-- 阿里巴巴数据源包 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.2</version>
 		</dependency>
 
 	</dependencies>
