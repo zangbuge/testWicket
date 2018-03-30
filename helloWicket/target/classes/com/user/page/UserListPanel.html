@@ -7,19 +7,28 @@
 <body>
 	<wicket:panel>
 		<div>
+		<form wicket:id="check" action="">
+		<span wicket:id="group">
 			<table>
 				<caption>用户列表</caption>
 				<tr>
+					<th >
+                      <input type="checkbox" wicket:id="groupSelector"> </input>
+                    </th>
 					<th>选择</th>
 					<th>用户名</th>
 					<th>年龄</th>
 					<th>图片地址</th>
 				</tr>
 				<tr wicket:id="rows">
-					
-					<td wicket:id="dataRow"></td>
+					<td style="width: 10%;height: 15px" align="left">
+                         <input type="checkbox" wicket:id="selected"/>
+                     </td>
+<!-- 					<td wicket:id="dataRow"></td> -->
 				</tr>
 			</table>
+		</span>
+		</form>
 		</div>
 	</wicket:panel>
 </body>
