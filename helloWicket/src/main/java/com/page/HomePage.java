@@ -1,6 +1,7 @@
 package com.page;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.wicket.AttributeModifier;
@@ -9,6 +10,10 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.CheckBoxMultipleChoice;
+import org.apache.wicket.markup.html.form.ChoiceRenderer;
+import org.apache.wicket.markup.html.form.DropDownChoice;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
@@ -16,6 +21,7 @@ import org.apache.wicket.markup.html.panel.Fragment;
 import org.apache.wicket.markup.repeater.RepeatingView;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.model.util.ListModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -40,6 +46,7 @@ public class HomePage extends WebPage {
 	@SpringBean
 	IStudentservice iStudentservice;
 	
+	@SuppressWarnings("unchecked")
 	public HomePage() {
 		
 		// 绑定页面的 wicket:id="label" 标签
@@ -210,6 +217,32 @@ public class HomePage extends WebPage {
 			}
 		});
 		
+		// 添加下拉框
+		List<User> us = new ArrayList<User>();
+		User u = new User();
+		u.setId("123");
+		u.setName("苹果");
+		us.add(u);
+		User u1 = new User();
+		u1.setId("456");
+		u1.setName("香蕉");
+		us.add(u1);
+		ChoiceRenderer<User> userCR = new ChoiceRenderer<User>("name");
+		DropDownChoice<User> dropDownChoice = new DropDownChoice<User>("fruits",new Model<User>(),us,userCR);
+		Form<Void> formTest = new Form<Void>("formTest");
+		// 放在表单中生效
+		formTest.add(dropDownChoice);
 		
+		
+		// 添加分组复选框
+		ChoiceRenderer<User> render = new ChoiceRenderer<User>("name");
+		formTest.add(
+				new CheckBoxMultipleChoice("checkGroup", 
+											new ListModel<String>(new ArrayList<String>()),
+		                                    us, 
+		                                    render));
+		
+		
+		add(formTest);
 	}
 }
